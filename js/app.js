@@ -80,35 +80,33 @@ const showDataModal = (singleDataDetails) => {
   setInnerText("features-3", `${singleDataDetails.features[3].feature_name}`);
 
   // Integrations
-
-  setInnerText(
-    "integrations1",
-    `${
-      singleDataDetails.integrations
-        ? singleDataDetails.integrations[0]
-        : "No Data Found"
-    }`
-  );
-  setInnerText(
-    "integrations2",
-    `${
-      singleDataDetails.integrations
-        ? singleDataDetails.integrations[1]
-        : "No Data Found"
-    }`
-  );
-
-  setInnerText("integrations2", `${singleDataDetails.integrations[2]}`);
+  const integration = document.getElementById("integrations");
+  integration.innerHTML = "";
+  integration.innerHTML += `
+<ul type="1">
+        ${singleDataDetails.integrations
+          .map((item) => `<li>${item}</li>`)
+          .join("")}
+      </ul>
+`;
   // Modal Card BG Image Side
   const imageContainer = document.getElementById("modal-card-image");
   imageContainer.innerHTML = "";
   imageContainer.innerHTML += `
   <div class="card" style="width: 340px; height:100%">
-  <img src="${singleDataDetails.image_link[0]}" class="card-img-top p-3 " alt="..." />
-  <a href="#" style="margin-left:200px;" class="btn btn-primary position-absolute mt-2 me-n5">Go somewhere</a>
+  <img src="${
+    singleDataDetails.image_link[0]
+  }" class="card-img-top p-3 " alt="..." />
+  <a href="#" style="margin-left:200px;" id="accuracy-btn" class="btn btn-danger position-absolute mt-2 me-n5" ><span id="accuracy-persent">${
+    singleDataDetails.accuracy.score * 100
+  }</span> % accuracy</a>
   <div class="card-body text-center">
-    <h5 class="card-title">${singleDataDetails.input_output_examples[0].input}</h5>
-    <p class="card-text">${singleDataDetails.input_output_examples[0].output} </p>
+    <h5 class="card-title">${
+      singleDataDetails.input_output_examples[0].input
+    }</h5>
+    <p class="card-text">${
+      singleDataDetails.input_output_examples[0].output
+    } </p>
   </div>
  </div>
   `;
