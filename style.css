@@ -1,0 +1,11 @@
+.pricing {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 10px;
+  text-align: center;
+}
+.modal-right-card {
+  background: rgba(235, 87, 87, 0.05);
+  border: 1px solid #eb5757;
+  border-radius: 16px;
+}

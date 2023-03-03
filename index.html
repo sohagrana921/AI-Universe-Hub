@@ -17,6 +17,8 @@
       src="https://kit.fontawesome.com/61d28dba12.js"
       crossorigin="anonymous"
     ></script>
+    <!-- Custom CSS Link  -->
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body class="container" onload="loadData()">
     <!-- Header Section Starts  -->
@@ -35,7 +37,11 @@
           id="cards-container"
         ></div>
         <div class="text-center my-5">
-          <button class="btn btn-danger fw-bolder" onclick="showAllData()">
+          <button
+            id="btn-see-more"
+            class="btn btn-danger fw-bolder"
+            onclick="showAllData()"
+          >
             See More
           </button>
         </div>
@@ -46,16 +52,14 @@
     <section>
       <div
         class="modal fade"
-        id="cardDetailsModal"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
+        id="singleDataModal"
         tabindex="-1"
-        aria-labelledby="staticBackdropLabel"
+        aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
           <div class="modal-content">
-            <div>
+            <div class="modal-header">
               <button
                 type="button"
                 class="btn-close"
@@ -63,10 +67,69 @@
                 aria-label="Close"
               ></button>
             </div>
-              <div id="modal-container" class="row column-gap-5">
-              
+            <div class="modal-body">
+              <div class="d-flex px-3 pb-3 gap-1 justify-content-between">
+                <div class="card w-50 border border-danger modal-right-card">
+                  <div class="card-body">
+                    <h5 id="modal-data-title" class="card-title"></h5>
+                    <div class="row my-3">
+                      <div class="pricing col-4">
+                        <p class="text-success fw-bold">
+                          <span id="basic-price">
+                            <br />
+                          </span>
+                          <span> Month <br /> </span>
+                          <span id="plan1"></span>
+                        </p>
+                      </div>
+                      <div class="pricing col-4">
+                        <p class="fw-bold text-warning-emphasis">
+                          <span id="pro-price"></span> <br />
+                          Month <br />
+                          <span id="plan2"></span>
+                        </p>
+                      </div>
+                      <div class="pricing col-4">
+                        <p class="fw-bold text-danger">
+                          Contact <br />
+                          Us for <br />
+                          <span id="enterPrice"></span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="d-flex px-2 gap-1 justify-content-between">
+                      <div>
+                        <h5>Features</h5>
+                        <ul>
+                          <li id="features-1"></li>
+                          <li id="features-2"></li>
+                          <li id="features-3"></li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h5>Integrations</h5>
+                        <ul>
+                          <li id="integrations1"></li>
+                          <li id="integrations2"></li>
+                          <li id="Integrations3"></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card w-50">
+                  <div class="card-body">
+                    <div id="modal-card-image " style="max-height: 200px"></div>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">
+                      Some quick example text to build on the card title and
+                      make up the bulk of the card's content.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
+            <div class="modal-footer"></div>
           </div>
         </div>
       </div>
