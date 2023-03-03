@@ -100,6 +100,16 @@ const showDataModal = (singleDataDetails) => {
 
   setInnerText("integrations2", `${singleDataDetails.integrations[2]}`);
   // Modal Card BG Image Side
-  const element = document.getElementById("modal-card-image");
-  element.style.backgroundImage = `url(${singleDataDetails.image_link[1]})`;
+  const imageContainer = document.getElementById("modal-card-image");
+  imageContainer.innerHTML = "";
+  imageContainer.innerHTML += `
+  <div class="card" style="width: 340px; height:100%">
+  <img src="${singleDataDetails.image_link[0]}" class="card-img-top p-3 " alt="..." />
+  <a href="#" style="margin-left:200px;" class="btn btn-primary position-absolute mt-2 me-n5">Go somewhere</a>
+  <div class="card-body text-center">
+    <h5 class="card-title">${singleDataDetails.input_output_examples[0].input}</h5>
+    <p class="card-text">${singleDataDetails.input_output_examples[0].output} </p>
+  </div>
+ </div>
+  `;
 };
