@@ -105,7 +105,7 @@ const showDataModal = (singleDataDetails) => {
   const modalContainer = document.getElementById("modal");
   modalContainer.innerHTML = "";
   modalContainer.innerHTML += `
-  <div class="d-md-flex px-3 pb-3 gap-1 justify-content-between">
+  <div class="d-md-flex px-3 pb-3 gap-1 d-flex align-items-center justify-content-between">
                 <div class="card w-50 border border-danger modal-right-card">
                   <div class="card-body">
                     <h5 class="card-title">${singleDataDetails.description}</h5>
@@ -181,11 +181,11 @@ const showDataModal = (singleDataDetails) => {
                   </div>
                 </div>
                 <div">
-                <div class="card" style="width: 340px; height:100%">
+                <div class="card" style="width: 340px;">
         <img src="${
           singleDataDetails.image_link[0]
         }" class="card-img-top p-3 " alt="..." />
-        <a href="#" style="margin-left:200px;" id="accuracy-btn" class="btn btn-danger position-absolute mt-2 me-n5" >${
+        <a href="#" style="margin-left:210px;" id="accuracy-btn" class="btn btn-danger position-absolute mt-1 me-n5" >${
           singleDataDetails.accuracy.score
             ? singleDataDetails.accuracy.score * 100
             : "0"
