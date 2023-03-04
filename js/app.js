@@ -2,7 +2,12 @@
 const loadData = () => {
   fetch("https://openapi.programming-hero.com/api/ai/tools")
     .then((res) => res.json())
-    .then((data) => displayData(data.data.tools.slice(0, 6)));
+    .then((data) => {
+      displayData(data.data.tools.slice(0, 6));
+    })
+    .catch((data) => {
+      console.error(data);
+    });
   // Spinner On
   const spinner = document.getElementById("spinner");
   spinner.classList.remove("d-none");
@@ -88,15 +93,9 @@ const loadSingleData = (id) => {
   fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`)
     .then((res) => res.json())
     .then((data) => showDataModal(data.data));
-  // Spinner Start
-  const spinner = document.getElementById("spinner");
-  spinner.classList.remove("d-none");
 };
 // Show Single Data in A Modal
 const showDataModal = (singleDataDetails) => {
-  // Spinner off
-  const spinner = document.getElementById("spinner");
-  spinner.classList.add("d-none");
   const modalContainer = document.getElementById("modal");
   modalContainer.innerHTML = "";
   modalContainer.innerHTML += `
