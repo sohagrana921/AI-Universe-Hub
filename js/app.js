@@ -180,7 +180,7 @@ const showDataModal = (singleDataDetails) => {
                   </div>
                 </div>
                 <div">
-                <div class="card" style="width: 340px;">
+                <div class="card" style="width: auto;">
         <img src="${
           singleDataDetails.image_link[0]
         }" class="card-img-top p-3 " alt="..." />
