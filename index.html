@@ -25,7 +25,22 @@
     <header>
       <section class="text-center">
         <h1 class="my-5 fw-bolder">AI Universe Hub</h1>
-        <button class="btn btn-danger fw-bolder mb-5">Sort By Date</button>
+        <button
+          onclick="sortFeaturesByDate()"
+          class="btn btn-danger fw-bolder mb-5"
+        >
+          Sort By Date
+        </button>
+      </section>
+      <!-- Spinner  -->
+      <section class="text-center">
+        <div
+          id="spinner"
+          class="spinner-border text-success d-none"
+          role="status"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </section>
     </header>
     <!-- Header Section Ends -->
@@ -49,78 +64,7 @@
     </main>
     <!-- main section end -->
     <!-- Modal Start  -->
-    <section>
-      <div
-        class="modal fade"
-        id="singleDataModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <div class="d-flex px-3 pb-3 gap-1 justify-content-between">
-                <div class="card w-50 border border-danger modal-right-card">
-                  <div class="card-body">
-                    <h5 id="modal-data-title" class="card-title"></h5>
-                    <div class="row my-3">
-                      <div class="pricing col-4">
-                        <p class="text-success fw-bold">
-                          <span id="basic-price">
-                            <br />
-                          </span>
-                          <span> Month <br /> </span>
-                          <span id="plan1"></span>
-                        </p>
-                      </div>
-                      <div class="pricing col-4">
-                        <p class="fw-bold text-warning-emphasis">
-                          <span id="pro-price"></span> <br />
-                          Month <br />
-                          <span id="plan2"></span>
-                        </p>
-                      </div>
-                      <div class="pricing col-4">
-                        <p class="fw-bold text-danger">
-                          Contact <br />
-                          Us for <br />
-                          <span id="enterPrice"></span>
-                        </p>
-                      </div>
-                    </div>
-                    <div class="d-flex px-2 gap-1 justify-content-between">
-                      <div>
-                        <h5>Features</h5>
-                        <ul>
-                          <li id="features-1"></li>
-                          <li id="features-2"></li>
-                          <li id="features-3"></li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h5>Integrations</h5>
-                        <p id="integrations"></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div id="modal-card-image"></div>
-              </div>
-            </div>
-            <div class="modal-footer"></div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <section id="modal"></section>
     <!-- Modal End -->
 
     <!-- Bootstrap script goes here -->

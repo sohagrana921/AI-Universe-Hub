@@ -3,9 +3,21 @@ const loadData = () => {
   fetch("https://openapi.programming-hero.com/api/ai/tools")
     .then((res) => res.json())
     .then((data) => displayData(data.data.tools.slice(0, 6)));
+  // Spinner On
+  const spinner = document.getElementById("spinner");
+  spinner.classList.remove("d-none");
 };
-//Show the data to UI
+//Show the 6 card to UI
 const displayData = (data) => {
+  // Spinner Off
+  const spinner = document.getElementById("spinner");
+  spinner.classList.add("d-none");
+  // Formate Date
+  const formatDate = (dateString) => {
+    const options = { month: "short", day: "2-digit", year: "numeric" };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", options);
+  };
   const cardContainer = document.getElementById("cards-container");
   cardContainer.innerHTML = "";
   data.forEach((singleData) => {
@@ -28,13 +40,36 @@ const displayData = (data) => {
           singleData.id
         }')"></i></a>
         </div>
-        <p class="card-text"><i class="fa-regular fa-calendar-days"></i> ${
+        <p class="card-text"><i class="fa-regular fa-calendar-days"></i> ${formatDate(
           singleData.published_in
-        } </p>
+        )} </p>
       </div>
     </div>
   </div>
     `;
+  });
+};
+// Filter Cards By Date
+const sortFeaturesByDate = () => {
+  const featuresContainer = document.getElementById("cards-container");
+  const features = Array.from(featuresContainer.children);
+
+  // Spinner On
+  const spinner = document.getElementById("spinner");
+  spinner.classList.remove("d-none");
+  features.sort((a, b) => {
+    const aDate = new Date(
+      a.querySelector(".fa-calendar-days").parentNode.textContent.trim()
+    );
+    const bDate = new Date(
+      b.querySelector(".fa-calendar-days").parentNode.textContent.trim()
+    );
+    return bDate - aDate;
+  });
+  // Spinner Off
+  spinner.classList.add("d-none");
+  features.forEach((feature) => {
+    featuresContainer.appendChild(feature);
   });
 };
 // Show All Data to UI
@@ -44,62 +79,110 @@ const showAllData = () => {
     .then((data) => displayData(data.data.tools));
   const btnSeeMore = document.getElementById("btn-see-more");
   btnSeeMore.classList.add("d-none");
+  // Spinner Start
+  const spinner = document.getElementById("spinner");
+  spinner.classList.remove("d-none");
 };
 // Load Single Data
 const loadSingleData = (id) => {
   fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`)
     .then((res) => res.json())
     .then((data) => showDataModal(data.data));
+  // Spinner Start
+  const spinner = document.getElementById("spinner");
+  spinner.classList.remove("d-none");
 };
-// Set InnerText
-function setInnerText(id, innerText) {
-  const div = document.getElementById(id);
-  div.innerText = innerText;
-}
 // Show Single Data in A Modal
 const showDataModal = (singleDataDetails) => {
-  console.log(singleDataDetails);
-  // Set Modal Card Title
-  setInnerText("modal-data-title", `${singleDataDetails.description}`);
-  // Price 1
-  setInnerText(
-    "basic-price",
-    `${
-      singleDataDetails.pricing[0] ? singleDataDetails.pricing[0].price : "Free"
-    }`
-  );
-  setInnerText("plan1", `${singleDataDetails.pricing[0].plan}`);
-  // Price-2
-  setInnerText("pro-price", `${singleDataDetails.pricing[1].price}`);
-  setInnerText("plan2", `${singleDataDetails.pricing[1].plan}`);
-  // Price-3
-  setInnerText("enterPrice", `${singleDataDetails.pricing[2].plan}`);
-  // Features
-  setInnerText("features-1", `${singleDataDetails.features[1].feature_name}`);
-  setInnerText("features-2", `${singleDataDetails.features[2].feature_name}`);
-  setInnerText("features-3", `${singleDataDetails.features[3].feature_name}`);
-
-  // Integrations
-  const integration = document.getElementById("integrations");
-  integration.innerHTML = "";
-  integration.innerHTML += `
-<ul type="1">
-        ${singleDataDetails.integrations
-          .map((item) => `<li>${item}</li>`)
-          .join("")}
-      </ul>
-`;
-  // Modal Card BG Image Side
-  const imageContainer = document.getElementById("modal-card-image");
-  imageContainer.innerHTML = "";
-  imageContainer.innerHTML += `
-  <div class="card" style="width: 340px; height:100%">
+  // Spinner off
+  const spinner = document.getElementById("spinner");
+  spinner.classList.add("d-none");
+  const modalContainer = document.getElementById("modal");
+  modalContainer.innerHTML = "";
+  modalContainer.innerHTML += `
+  <div
+  class="modal fade"
+  id="singleDataModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-md-flex px-3 pb-3 gap-1 justify-content-between">
+          <div class="card w-50 border border-danger modal-right-card">
+            <div class="card-body">
+              <h5 class="card-title">${singleDataDetails.description}</h5>
+              <div class="row my-3">
+                <div class="pricing col-4">
+                  <p class="text-success fw-bold">
+                    <span>${
+                      singleDataDetails.pricing[0]
+                        ? singleDataDetails.pricing[0].price
+                        : "Free"
+                    }
+                      <br />
+                    </span>
+                    <span> Month <br /> </span>
+                    <span>${singleDataDetails.pricing[0].plan}</span>
+                  </p>
+                </div>
+                <div class="pricing col-4">
+                  <p class="fw-bold text-warning-emphasis">
+                    <span>${singleDataDetails.pricing[1].price}</span> <br />
+                    Month <br />
+                    <span>${singleDataDetails.pricing[1].plan}</span>
+                  </p>
+                </div>
+                <div class="pricing col-4">
+                  <p class="fw-bold text-danger">
+                    Contact <br />
+                    Us for <br />
+                    <span>${singleDataDetails.pricing[2].plan}</span>
+                  </p>
+                </div>
+              </div>
+              <div class="d-md-flex px-2 gap-1 justify-content-between">
+                <div>
+                  <h5>Features</h5>
+                  <ul>
+                    <li>${singleDataDetails.features[1].feature_name}</li>
+                    <li>${singleDataDetails.features[2].feature_name}</li>
+                    <li>${singleDataDetails.features[3].feature_name}</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5>Integrations</h5>
+                  <p">
+                  <ul type="1">
+                  ${singleDataDetails.integrations
+                    .map((item) => `<li>${item}</li>`)
+                    .join("")}
+                </ul>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div">
+          <div class="card" style="width: 340px; height:100%">
   <img src="${
     singleDataDetails.image_link[0]
   }" class="card-img-top p-3 " alt="..." />
-  <a href="#" style="margin-left:200px;" id="accuracy-btn" class="btn btn-danger position-absolute mt-2 me-n5" ><span id="accuracy-persent">${
-    singleDataDetails.accuracy.score * 100
-  }</span> % accuracy</a>
+  <a href="#" style="margin-left:200px;" id="accuracy-btn" class="btn btn-danger position-absolute mt-2 me-n5" >${
+    singleDataDetails.accuracy.score
+      ? singleDataDetails.accuracy.score * 100
+      : "0"
+  }% accuracy</a>
   <div class="card-body text-center">
     <h5 class="card-title">${
       singleDataDetails.input_output_examples[0].input
@@ -109,5 +192,12 @@ const showDataModal = (singleDataDetails) => {
     } </p>
   </div>
  </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
   `;
 };
