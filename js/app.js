@@ -123,7 +123,7 @@ const showDataModal = (singleDataDetails) => {
                           <span>${
                             singleDataDetails.pricing
                               ? singleDataDetails.pricing[0].plan
-                              : ""
+                              : "Basic"
                           }</span>
                         </p>
                       </div>
@@ -132,13 +132,13 @@ const showDataModal = (singleDataDetails) => {
                           <span>${
                             singleDataDetails.pricing
                               ? singleDataDetails.pricing[1].price
-                              : ""
+                              : "No Cost"
                           }</span> <br />
                           Month <br />
                           <span>${
                             singleDataDetails.pricing
                               ? singleDataDetails.pricing[1].plan
-                              : ""
+                              : "Professional"
                           }</span>
                         </p>
                       </div>
@@ -149,7 +149,7 @@ const showDataModal = (singleDataDetails) => {
                           <span>${
                             singleDataDetails.pricing
                               ? singleDataDetails.pricing[2].plan
-                              : ""
+                              : "For Pro"
                           }</span>
                         </p>
                       </div>
@@ -199,7 +199,7 @@ const showDataModal = (singleDataDetails) => {
           <p class="card-text">${
             singleDataDetails.input_output_examples
               ? singleDataDetails.input_output_examples[0].output
-              : "No Example"
+              : "No Example Yet<br> Take a break "
           } </p>
         </div>
        </div>
