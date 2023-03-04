@@ -12,7 +12,8 @@ const loadData = () => {
   const spinner = document.getElementById("spinner");
   spinner.classList.remove("d-none");
 };
-//Show the 6 card to UI
+
+//Show cards to UI
 const displayData = (data) => {
   // Spinner Off
   const spinner = document.getElementById("spinner");
@@ -41,9 +42,9 @@ const displayData = (data) => {
         <h5 class="card-title fw-bold">${singleData.name}</h5>
         <div class="text-end">
         <a href="#" data-bs-toggle="modal"
-        data-bs-target="#singleDataModal" class="btn btn-light rounded-circle text-danger" ><i class="fa-solid fa-arrow-right" onclick="loadSingleData('${
+        data-bs-target="#singleDataModal" onclick="loadSingleData('${
           singleData.id
-        }')"></i></a>
+        }')" class="btn btn-light rounded-circle text-danger" ><i class="fa-solid fa-arrow-right"></i></a>
         </div>
         <p class="card-text"><i class="fa-regular fa-calendar-days"></i> ${formatDate(
           singleData.published_in
@@ -58,7 +59,6 @@ const displayData = (data) => {
 const sortFeaturesByDate = () => {
   const featuresContainer = document.getElementById("cards-container");
   const features = Array.from(featuresContainer.children);
-
   // Spinner On
   const spinner = document.getElementById("spinner");
   spinner.classList.remove("d-none");
@@ -77,7 +77,7 @@ const sortFeaturesByDate = () => {
     featuresContainer.appendChild(feature);
   });
 };
-// Show All Data to UI
+// Show all data to UI
 const showAllData = () => {
   fetch("https://openapi.programming-hero.com/api/ai/tools")
     .then((res) => res.json())
@@ -92,7 +92,12 @@ const showAllData = () => {
 const loadSingleData = (id) => {
   fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`)
     .then((res) => res.json())
-    .then((data) => showDataModal(data.data));
+    .then((data) => {
+      showDataModal(data.data);
+    })
+    .catch((data) => {
+      console.error(data);
+    });
 };
 // Show Single Data in A Modal
 const showDataModal = (singleDataDetails) => {
@@ -178,9 +183,9 @@ const showDataModal = (singleDataDetails) => {
     singleDataDetails.image_link[0]
   }" class="card-img-top p-3 " alt="..." />
   <a href="#" style="margin-left:200px;" id="accuracy-btn" class="btn btn-danger position-absolute mt-2 me-n5" >${
-    singleDataDetails.accuracy.score
+    singleDataDetails.accuracy.score > "0"
       ? singleDataDetails.accuracy.score * 100
-      : "0"
+      : (document.getElementById("accuracy-btn").style.display = "none")
   }% accuracy</a>
   <div class="card-body text-center">
     <h5 class="card-title">${
