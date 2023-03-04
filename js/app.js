@@ -105,8 +105,8 @@ const showDataModal = (singleDataDetails) => {
   const modalContainer = document.getElementById("modal");
   modalContainer.innerHTML = "";
   modalContainer.innerHTML += `
-  <div class="d-md-flex px-3 pb-3 gap-1 d-flex align-items-center justify-content-between">
-                <div class="card w-50 border border-danger modal-right-card">
+  <div class="d-md-flex px-3 pb-3 gap-1 align-items-center justify-content-between">
+                <div class="card w-md-50 mb-5 border border-danger modal-right-card">
                   <div class="card-body">
                     <h5 class="card-title">${singleDataDetails.description}</h5>
                     <div class="row my-3">

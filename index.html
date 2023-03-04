@@ -20,10 +20,10 @@
     <!-- Custom CSS Link  -->
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="container" onload="loadData()">
+  <body onload="loadData()">
     <!-- Header Section Starts  -->
     <header>
-      <section class="text-center">
+      <section class="text-center container">
         <h1 class="my-5 fw-bolder">AI Universe Hub</h1>
         <button onclick="sortFeaturesByDate()" class="btn btn-danger mb-5">
           Sort By Date
@@ -44,7 +44,7 @@
     <!-- Header Section Ends -->
     <!-- main section starts -->
     <main>
-      <section>
+      <section class="container">
         <div
           class="row row-cols-1 row-cols-md-3 g-4"
           id="cards-container"
